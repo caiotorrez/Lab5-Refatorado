@@ -1,9 +1,7 @@
 package Apostas;
 
-import Seguro.Seguro;
-
 /**
- * Classe que representa apostas a serem feitas em um cenário.
+ * Classe que representa apostas a serem feitas em um cenï¿½rio.
  * @author CaioTorrez
  *
  */
@@ -14,10 +12,10 @@ public abstract class Aposta {
 	private String previsao;
 
 	/**
-	 * Cadastra uma aposta a partir de um nome do apostador, um valor e uma previsão.
-	 * @param apostador Apostador é o nome do representante da aposta.
-	 * @param valor Valor é um inteiro representando o total a ser apostado.
-	 * @param previsao Previsão só são possiveis duas, ou "VAI ACONTECER" ou "NÃO VAI ACONTECER".
+	 * Cadastra uma aposta a partir de um nome do apostador, um valor e uma previsï¿½o.
+	 * @param apostador Apostador ï¿½ o nome do representante da aposta.
+	 * @param valor Valor ï¿½ um inteiro representando o total a ser apostado.
+	 * @param previsao Previsï¿½o sï¿½ sï¿½o possiveis duas, ou "VAI ACONTECER" ou "Nï¿½O VAI ACONTECER".
 	 */
 	public Aposta(String apostador, int valor, String previsao) {
 		this.nomeDoApostador = apostador;
@@ -26,8 +24,8 @@ public abstract class Aposta {
 	}
 	
 	/**
-	 * Mostra o estado de previsão apostado.
-	 * @return Retorna uma String representando a previsão feita nessa aposta.
+	 * Mostra o estado de previsï¿½o apostado.
+	 * @return Retorna uma String representando a previsï¿½o feita nessa aposta.
 	 */
 	public String getPrevisao() {
 		return this.previsao;
@@ -40,17 +38,6 @@ public abstract class Aposta {
 	public int getValor() {
 		return this.valor;
 	}
-	
-	/**
-	 * Métodos a serem implementados por sub-classes que irão ter comportamentos diferentes.
-	 */
-	public abstract void alteraSeguro(Seguro seguro);
-	
-	/**
-	 * Métodos a serem implementados por sub-classes que irão ter comportamentos diferentes.
-	 * @return retornará um inteiro.
-	 */
-	public abstract int getValorAssegurado();
 
 	@Override
 	public int hashCode() {
@@ -87,7 +74,7 @@ public abstract class Aposta {
 	}
 	
 	/**
-	 * Retorna uma String com nome do apostador, o valor apostado e a previsão apostada.
+	 * Retorna uma String com nome do apostador, o valor apostado e a previsï¿½o apostada.
 	 */
 	public String toString() {
 		return this.nomeDoApostador + " - R$" + this.valor + " - " + this.previsao;

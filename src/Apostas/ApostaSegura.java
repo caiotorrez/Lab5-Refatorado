@@ -1,5 +1,7 @@
 package Apostas;
 
+import java.util.Random;
+
 import Exceptions.CaractersInvalidoException;
 import Exceptions.ValorInvalidoException;
 import Seguro.Seguro;
@@ -9,6 +11,7 @@ import Seguro.SeguroValor;
 public class ApostaSegura extends Aposta {
 	
 	private Seguro seguro;
+	private int id;
 
 	private void checkCadastro(String apostador, int valor, String previsao, double valorAssegurado) {
 		if (apostador == null || apostador.trim().equals("")) {
@@ -28,23 +31,28 @@ public class ApostaSegura extends Aposta {
 	public ApostaSegura(String apostador, int valor, String previsao, int valorAssegurado) {
 		super(apostador, valor, previsao);
 		this.seguro = new SeguroValor(valorAssegurado);
+		this.id = new Random().nextInt();
 		checkCadastro(apostador, valor, previsao, valorAssegurado);
-			
-		}
+	}
 	
 	public ApostaSegura(String apostador, int valor, String previsao, double taxa) {
 		super(apostador, valor, previsao);
 		this.seguro = new SeguroTaxa(valor, taxa);
+		this.id = new Random().nextInt();
 		checkCadastro(apostador, valor, previsao, taxa);
 	}
 	
-	@Override
-	public void alteraSeguro(Seguro seguro) {
+	public int alteraSeguro(Seguro seguro) {
 		this.seguro = seguro;
+		return this.id;
 	}
 
-	@Override
 	public int getValorAssegurado() {
 		return this.seguro.getValorAssegurado();
 	}
+
+	public int getId() {
+		return id;
+	}
+	
 }

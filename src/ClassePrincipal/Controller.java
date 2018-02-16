@@ -5,26 +5,20 @@ import java.util.ArrayList;
 import Cenarios.Cenario;
 import Cenarios.CenarioBonus;
 import Cenarios.CenarioComum;
-import Exceptions.CadastroInvalidoException;
-import Exceptions.ConsultaException;
-import Exceptions.ExibicaoException;
-import Exceptions.InicializacaoException;
-import Exceptions.PosicaoInvalidaException;
+import Validador.Validador;
 import easyaccept.EasyAccept;
 
 public class Controller {
 	
-	private ArrayList<Cenario> cenarios = new ArrayList<>();
+	private ArrayList<Cenario> cenarios;
 	private int caixa;
 	private double taxa;
+	Validador validar;
 	
 	public void inicializa(int caixa, double taxa) {
-		if (caixa < 0) {
-			throw new InicializacaoException("Caixa");
-		}
-		if (taxa < 0) {
-			throw new InicializacaoException("Taxa");
-		}
+		this.validar = new Validador();
+		this.cenarios = new ArrayList<>();
+		this.validar.validaCaixa(caixa, taxa);
 		this.caixa = caixa;
 		this.taxa = taxa;
 	}
@@ -45,12 +39,7 @@ public class Controller {
 	}
 	
 	public String exibirCenario(int cenario) {
-		if (cenario <= 0) {
-			throw new PosicaoInvalidaException("Cenario invalido");
-		
-		} else if (cenario > this.cenarios.size()) {
-			throw new PosicaoInvalidaException("Cenario nao cadastrado");
-		}
+		this.validar.validaExibicaoCenario(cenario, this.cenarios.size());
 		return cenario + " - " + this.cenarios.get(cenario - 1);
 	}
 	
@@ -58,31 +47,23 @@ public class Controller {
 		String output = "";
 		for (int i = 1; i <= cenarios.size(); i++) {
 			output+= this.exibirCenario(i) + "\n";
-		} return output == "" ? "N„o h· cen·rios cadastrados." : output;
+		} return output == "" ? "N√£o h√° cenarios cadastrados." : output;
 	}
 	
-	private void checkCadastroAposta(int cenario, String causa) {
-		if (cenario < 1) {
-			throw new CadastroInvalidoException("de aposta" + causa + ": Cenario invalido");
-
-		} else if (cenario > this.cenarios.size()) {
-			throw new CadastroInvalidoException("de aposta" + causa + ": Cenario nao cadastrado");
-		}
-	}
 	
 	public void cadastrarAposta(int cenario, String apostador, int valor, String previsao) {
-		this.checkCadastroAposta(cenario, "");
+		this.validar.checkCadastroAposta(cenario, "", this.cenarios.size());
 		this.cenarios.get(cenario - 1).addApostadorComum(apostador, valor, previsao);
 	}
 	
 	public int cadastrarApostaSeguraValor(int cenario, String apostador, int valor, String previsao, int valorAssegurado, int custo) {
-		this.checkCadastroAposta(cenario, " assegurada por valor");
+		this.validar.checkCadastroAposta(cenario, " assegurada por valor", this.cenarios.size());
 		this.caixa += custo;
 		return this.cenarios.get(cenario - 1).addApostadorSeguroValor(apostador, valor, previsao, valorAssegurado);
 	}
 	
 	public int cadastrarApostaSeguraTaxa(int cenario, String apostador, int valor, String previsao, double taxa, int custo) {
-		this.checkCadastroAposta(cenario, " assegurada por taxa");
+		this.validar.checkCadastroAposta(cenario, " assegurada por taxa", this.cenarios.size());
 		this.caixa += custo;
 		return this.cenarios.get(cenario - 1).addApostadorSeguroTaxa(apostador, valor, previsao, taxa);
 	}
@@ -98,74 +79,37 @@ public class Controller {
 	}
 	
 	public int valorTotalDeApostas(int cenario) {
-		if (cenario < 1) {
-			throw new PosicaoInvalidaException("do valor total de apostas", "Cenario invalido");
-			
-		} else if (cenario > cenarios.size()) {
-			throw new PosicaoInvalidaException("do valor total de apostas", "Cenario nao cadastrado");
-		}
+		this.validar.checkValorDeApostas(cenario, this.cenarios.size());
 		return this.cenarios.get(cenario - 1).getTotalApostado();
 	}
 	
 	public int totalDeApostas(int cenario) {
-		if (cenario < 1) {
-			throw new PosicaoInvalidaException("do total de apostas", "Cenario invalido");
-			
-		} else if (cenario > this.cenarios.size()) {
-			throw new PosicaoInvalidaException("do total de apostas", "Cenario nao cadastrado");
-		}
+		this.validar.checkTotalApostas(cenario, this.cenarios.size());
 		return this.cenarios.get(cenario - 1).getTotalDeApostadores();
 	}
 	
 	public String exibeApostas(int cenario) {
-		if (cenario < 1) {
-			throw new ExibicaoException("Cenario invalido");
-			
-		} else if (cenario > this.cenarios.size()) {
-			throw new ExibicaoException("Cenario nao cadastrado");
-		}
+		this.validar.checkExibeApostas(cenario, this.cenarios.size());
 		String output = this.cenarios.get(cenario - 1).getApostas();
-		return output == "" ? "N„o h· apostadores cadastrados nesse cen·rio." : output;
+		return output == "" ? "N√£o h√° apostadores cadastrados nesse cen√°rio." : output;
 	}
 	
 	public int getCaixaCenario(int cenario) {
-		if (cenario < 1) {
-			throw new ConsultaException("do caixa do cenario", "Cenario invalido");
-			
-		} else if (cenario > this.cenarios.size()) {
-			throw new ConsultaException("do caixa do cenario", "Cenario nao cadastrado");
-			
-		} if (this.cenarios.get(cenario - 1).getEstado().equals("Nao finalizado")) {
-			throw new ConsultaException("do caixa do cenario", "Cenario ainda esta aberto");
-		}
-		
+		this.validar.checkGetCaixaCenario(cenario, this.cenarios.size());
+		this.validar.checkGetCaixaEstado(this.cenarios.get(cenario - 1).getEstado());
 		return (int) (this.cenarios.get(cenario - 1).getValorPremiado() * this.taxa);
 	}
 	
 	public void fecharAposta(int cenario, boolean ocorreu) {
-		if (cenario < 1) {
-			throw new ExibicaoException("Erro ao fechar aposta", "Cenario invalido");
-			
-		} else if (cenario > this.cenarios.size()) {
-			throw new ExibicaoException("Erro ao fechar aposta", "Cenario nao cadastrado");
-			
-		} else if (this.cenarios.get(cenario - 1).getEstado().contains("Finalizado")) {
-			throw new ExibicaoException("Erro ao fechar aposta", "Cenario ja esta fechado");
-		}
+		this.validar.checkFecharAposta(cenario, this.cenarios.size());
+		this.validar.checkFecharApostaEstado(this.cenarios.get(cenario - 1).getEstado());
 		this.cenarios.get(cenario - 1).fecharCenario(ocorreu);
 		this.caixa += this.getCaixaCenario(cenario) - this.cenarios.get(cenario - 1).getValorAssegurado();
 	}
 	
 	public int getTotalRateioCenario(int cenario) {
-		if (cenario < 1) {
-			throw new ConsultaException("do total de rateio do cenario", "Cenario invalido");
-
-		} else if (cenario > this.cenarios.size()) {
-			throw new ConsultaException("do total de rateio do cenario", "Cenario nao cadastrado");
-			
-		} if (this.cenarios.get(cenario - 1).getEstado().equals("Nao finalizado")) {
-			throw new ConsultaException("do total de rateio do cenario", "Cenario ainda esta aberto");
-		}
+		this.validar.checkTotalRateioCenario(cenario, this.cenarios.size());
+		this.validar.checkTotalRateioEstado(this.cenarios.get(cenario - 1).getEstado());
 		return this.cenarios.get(cenario - 1).getTotalRateioCenario(this.taxa);
 	}
 	

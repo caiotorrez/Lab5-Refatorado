@@ -2,7 +2,6 @@ package Apostas;
 
 import Exceptions.CaractersInvalidoException;
 import Exceptions.ValorInvalidoException;
-import Seguro.Seguro;
 
 public class ApostaComum extends Aposta {
 	
@@ -25,15 +24,4 @@ public class ApostaComum extends Aposta {
 		super(nome, valor, previsao);
 		this.checkCadastro(nome, valor, previsao);
 	}
-
-	@Override
-	public void alteraSeguro(Seguro seguro) {
-	}
-	
-	@Override
-	public int getValorAssegurado() {
-		return 0;
-	}
-
-
 }
