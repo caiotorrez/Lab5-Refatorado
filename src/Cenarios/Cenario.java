@@ -12,18 +12,20 @@ import Seguro.SeguroTaxa;
 import Seguro.SeguroValor;
 
 
-public abstract class Cenario {
+public abstract class Cenario implements Comparable<Cenario> {
 
-	private final String descricao;
+	private int id;
+	protected final String descricao;
 	private String estado;
 	private ArrayList<Aposta> apostasComum;
 	private Map<Integer, ApostaSegura> apostasSeguras;
 
-	public Cenario(String descricao) {
+	public Cenario(String descricao, int id) {
 		if (descricao.trim().equals("")) {
 			throw new CaractersInvalidoException("de cenario:", "Descricao nao pode ser vazia");
 		}
 		this.descricao = descricao;
+		this.id = id;
 		this.estado = "Nao finalizado";
 		this.apostasComum = new ArrayList<>();
 		this.apostasSeguras = new HashMap<>();
@@ -174,6 +176,14 @@ public abstract class Cenario {
 		} else if (!descricao.equals(other.descricao))
 			return false;
 		return true;
+	}
+	
+	public int getID() {
+		return this.id;
+	}
+	
+	public int compareTo(Cenario outroCenario) {
+		return new Integer(this.getID()).compareTo(new Integer(outroCenario.getID()));
 	}
 
 	@Override

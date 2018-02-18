@@ -16,14 +16,14 @@ public class TesteCenarioBonus {
 	
 	@Before
 	public void setUp() {
-		this.cenario = new CenarioBonus("Todo mundo vai pagar com 10 LP2!!1!", 1000);
+		this.cenario = new CenarioBonus("Todo mundo vai pagar com 10 LP2!!1!", 1000, 0);
 	}
 	
 	@Test
 	public void testCadastroNull() {
 		try {
-			this.cenario = new CenarioBonus(null, 0);
-			fail("Não pode ser possível.");
+			this.cenario = new CenarioBonus(null, 0, 0);
+			fail("Nï¿½o pode ser possï¿½vel.");
 		} catch (NullPointerException npe){
 			assertEquals(null, npe.getMessage());
 		}
@@ -32,8 +32,8 @@ public class TesteCenarioBonus {
 	@Test
 	public void testCadastroEmBranco() {
 		try {
-			this.cenario = new CenarioBonus("   ", 0);
-			fail("Não pode ser possível.");
+			this.cenario = new CenarioBonus("   ", 0, 0);
+			fail("Nï¿½o pode ser possï¿½vel.");
 		} catch (CaractersInvalidoException nie) {
 			assertEquals("Erro no cadastro de cenario: Descricao nao pode ser vazia", nie.getMessage());
 		}
@@ -42,8 +42,8 @@ public class TesteCenarioBonus {
 	@Test
 	public void testCadastroValorZero() {
 		try {
-			this.cenario = new CenarioBonus("vai da errado?", 0);
-			fail("Não pode ser possível cadastrar um cenário bônus com valor igual ou menor que 0.");
+			this.cenario = new CenarioBonus("vai da errado?", 0, 0);
+			fail("Nï¿½o pode ser possï¿½vel cadastrar um cenï¿½rio bï¿½nus com valor igual ou menor que 0.");
 		} catch (Exception e) {
 			assertEquals("Erro no cadastro de cenario: Bonus invalido", e.getMessage());
 		}
@@ -52,8 +52,8 @@ public class TesteCenarioBonus {
 	@Test
 	public void testCadastroValorNegativo() {
 		try {
-			this.cenario = new CenarioBonus("vai da errado?", -1);
-			fail("Não pode ser possível cadastrar um cenário bônus com valor igual ou menor que 0.");
+			this.cenario = new CenarioBonus("vai da errado?", -1, 0);
+			fail("Nï¿½o pode ser possï¿½vel cadastrar um cenï¿½rio bï¿½nus com valor igual ou menor que 0.");
 		} catch (Exception e) {
 			assertEquals("Erro no cadastro de cenario: Bonus invalido", e.getMessage());
 		}

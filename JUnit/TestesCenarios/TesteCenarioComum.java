@@ -17,14 +17,14 @@ public class TesteCenarioComum {
 	
 	@Before
 	public void setUp() {
-		this.cenario = new CenarioComum("Todo mundo vai pagar com 10 LP2!!1!");
+		this.cenario = new CenarioComum("Todo mundo vai pagar com 10 LP2!!1!", 0);
 	}
 
 	@Test
 	public void testCadastroNull() {
 		try {
-			this.cenario = new CenarioComum(null);
-			fail("Não pode ser possível.");
+			this.cenario = new CenarioComum(null, 0);
+			fail("Nï¿½o pode ser possï¿½vel.");
 		} catch (NullPointerException npe){
 			assertEquals(null, npe.getMessage());
 		}
@@ -33,8 +33,8 @@ public class TesteCenarioComum {
 	@Test
 	public void testCadastroEmBranco() {
 		try {
-			this.cenario = new CenarioComum("   ");
-			fail("Não pode ser possível.");
+			this.cenario = new CenarioComum("   ", 0);
+			fail("Nï¿½o pode ser possï¿½vel.");
 		} catch (CaractersInvalidoException nie) {
 			assertEquals("Erro no cadastro de cenario: Descricao nao pode ser vazia", nie.getMessage());
 		}
@@ -54,8 +54,8 @@ public class TesteCenarioComum {
 	@Test
 	public void testAddApostadorValorInvalido() {
 		try {
-			this.cenario.addApostadorComum("zé", 0, "VAI ACONTECER");
-			fail("Não pode ser possível adcionar apostador com valores abaixo de 1");
+			this.cenario.addApostadorComum("zï¿½", 0, "VAI ACONTECER");
+			fail("Nï¿½o pode ser possï¿½vel adcionar apostador com valores abaixo de 1");
 		} catch (ValorInvalidoException vie) {
 			assertEquals("Erro no cadastro de aposta: Valor nao pode ser menor ou igual a zero", vie.getMessage());
 		}
@@ -65,7 +65,7 @@ public class TesteCenarioComum {
 	public void testAddApostadorNomeInvalido() {
 		try {
 			this.cenario.addApostadorComum("   ", 110, "VAI ACONTECER");
-			fail("Não pode ser possível adcionar apostador nome em branco.");
+			fail("Nï¿½o pode ser possï¿½vel adcionar apostador nome em branco.");
 		} catch (CaractersInvalidoException nie) {
 			assertEquals("Erro no cadastro de aposta: Apostador nao pode ser vazio ou nulo", nie.getMessage());
 		}
@@ -74,8 +74,8 @@ public class TesteCenarioComum {
 	@Test
 	public void testAddApostadorPrevisaoInvalida() {
 		try {
-			this.cenario.addApostadorComum("José do ôi", 110, "akakakak");
-			fail("Não pode ser possível cadastrar com uma previsão inválida.");
+			this.cenario.addApostadorComum("Josï¿½ do ï¿½i", 110, "akakakak");
+			fail("Nï¿½o pode ser possï¿½vel cadastrar com uma previsï¿½o invï¿½lida.");
 		} catch (CaractersInvalidoException cie) {
 			assertEquals("Erro no cadastro de aposta: Previsao invalida", cie.getMessage());
 		}
@@ -83,13 +83,13 @@ public class TesteCenarioComum {
 	
 	@Test
 	public void testGetCashSemFechar() {
-		this.cenario.addApostadorComum("zé", 100, "VAI ACONTECER");
+		this.cenario.addApostadorComum("zï¿½", 100, "VAI ACONTECER");
 		assertEquals(0, this.cenario.getValorPremiado());
 	}
 	
 	@Test
 	public void testGetCash() {
-		this.cenario.addApostadorComum("zé", 100, "VAI ACONTECER");
+		this.cenario.addApostadorComum("zï¿½", 100, "VAI ACONTECER");
 		this.cenario.addApostadorComum("maria", 50, "N VAI ACONTECER");
 		
 		this.cenario.fecharCenario(true);
@@ -101,7 +101,7 @@ public class TesteCenarioComum {
 	
 	@Test
 	public void testGetCashTotal() {
-		this.cenario.addApostadorComum("zé", 100, "VAI ACONTECER");
+		this.cenario.addApostadorComum("zï¿½", 100, "VAI ACONTECER");
 		this.cenario.addApostadorComum("maria", 50, "N VAI ACONTECER");
 		
 		assertEquals(150, this.cenario.getTotalApostado());

@@ -8,8 +8,8 @@ public class CenarioBonus extends Cenario {
 	
 	private int bonus;
 
-	public CenarioBonus(String descricao, int bonus) {
-		super(descricao);
+	public CenarioBonus(String descricao, int bonus, int id) {
+		super(descricao, id);
 		if (bonus <= 0) {
 			throw new ValorInvalidoException("de cenario:", "Bonus invalido");
 		}

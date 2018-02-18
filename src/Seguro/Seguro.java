@@ -11,5 +11,4 @@ public abstract class Seguro {
 	public int getValorAssegurado() {
 		return this.valorAssegurado;
 	}
-
 }

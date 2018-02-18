@@ -1,11 +1,14 @@
 package ClassePrincipal;
 
 import java.util.ArrayList;
+import java.util.Collections;
 
 import Cenarios.Cenario;
 import Cenarios.CenarioBonus;
 import Cenarios.CenarioComum;
-import Validador.Validador;
+import OrdenadoresCenarios.CenarioComparatorDescricao;
+import OrdenadoresCenarios.CenarioComparatorQtApostas;
+import Validador.ValidadorDoController;
 import easyaccept.EasyAccept;
 
 public class Controller {
@@ -13,10 +16,10 @@ public class Controller {
 	private ArrayList<Cenario> cenarios;
 	private int caixa;
 	private double taxa;
-	Validador validar;
+	ValidadorDoController validar;
 	
 	public void inicializa(int caixa, double taxa) {
-		this.validar = new Validador();
+		this.validar = new ValidadorDoController();
 		this.cenarios = new ArrayList<>();
 		this.validar.validaCaixa(caixa, taxa);
 		this.caixa = caixa;
@@ -28,13 +31,13 @@ public class Controller {
 	}
 	
 	public int cadastrarCenario(String descricao) {
-		this.cenarios.add(new CenarioComum(descricao));
+		this.cenarios.add(new CenarioComum(descricao, this.cenarios.size()));
 		return this.cenarios.size();
 	}
 	
 	public int cadastrarCenario(String descricao, int bonus) {
 		this.caixa -= bonus;
-		this.cenarios.add(new CenarioBonus(descricao, bonus));
+		this.cenarios.add(new CenarioBonus(descricao, bonus, this.cenarios.size()));
 		return this.cenarios.size();
 	}
 	
@@ -49,7 +52,6 @@ public class Controller {
 			output+= this.exibirCenario(i) + "\n";
 		} return output == "" ? "Não há cenarios cadastrados." : output;
 	}
-	
 	
 	public void cadastrarAposta(int cenario, String apostador, int valor, String previsao) {
 		this.validar.checkCadastroAposta(cenario, "", this.cenarios.size());
@@ -111,6 +113,16 @@ public class Controller {
 		this.validar.checkTotalRateioCenario(cenario, this.cenarios.size());
 		this.validar.checkTotalRateioEstado(this.cenarios.get(cenario - 1).getEstado());
 		return this.cenarios.get(cenario - 1).getTotalRateioCenario(this.taxa);
+	}
+	
+	public void alterarOrdem(String ordem) {
+		if (ordem.equals("CADASTRO")) {
+			Collections.sort(this.cenarios);
+		} else if (ordem.equals("NOME")) {
+			Collections.sort(this.cenarios, new CenarioComparatorDescricao());
+		} else {
+			Collections.sort(this.cenarios, new CenarioComparatorQtApostas());
+		}
 	}
 	
 	public static void main(String[] args) {

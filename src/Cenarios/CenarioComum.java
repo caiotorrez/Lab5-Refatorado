@@ -3,10 +3,10 @@ package Cenarios;
 public class CenarioComum extends Cenario {
 
 	/**
-	 * Construtor do cenário onde o parâmentro a ser passado representa a descriação do cenário a ser previsto.
-	 * @param descricao Inserir descrição do cenário à construir.
+	 * Construtor do cenï¿½rio onde o parï¿½mentro a ser passado representa a descriaï¿½ï¿½o do cenï¿½rio a ser previsto.
+	 * @param descricao Inserir descriï¿½ï¿½o do cenï¿½rio ï¿½ construir.
 	 */
-	public CenarioComum(String descricao) {
-		super(descricao);
+	public CenarioComum(String descricao, int id) {
+		super(descricao, id);
 	}
 }
