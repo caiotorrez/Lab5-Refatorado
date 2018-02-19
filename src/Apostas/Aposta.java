@@ -1,7 +1,8 @@
 package Apostas;
 
 /**
- * Classe que representa apostas a serem feitas em um cen�rio.
+ * Classe abstrata que representa uma aposta feita em cenarios de apostas, contendo um apostador, um valor e uma previsao.
+ * 
  * @author CaioTorrez
  *
  */
@@ -11,11 +12,13 @@ public abstract class Aposta {
 	protected int valor;
 	private String previsao;
 
+	
 	/**
-	 * Cadastra uma aposta a partir de um nome do apostador, um valor e uma previs�o.
-	 * @param apostador Apostador � o nome do representante da aposta.
-	 * @param valor Valor � um inteiro representando o total a ser apostado.
-	 * @param previsao Previs�o s� s�o possiveis duas, ou "VAI ACONTECER" ou "N�O VAI ACONTECER".
+	 * Construtor da classe abstrata Aposta contendo os parametros apostador, valor e previsao.
+	 * 
+	 * @param apostador String que representarar o nome do apostador a ser cadastrado.
+	 * @param valor um inteiro com o valor a ser apostado.
+	 * @param previsao uma String que cadastra a previsao da conclusao do cenario.
 	 */
 	public Aposta(String apostador, int valor, String previsao) {
 		this.nomeDoApostador = apostador;
@@ -23,17 +26,21 @@ public abstract class Aposta {
 		this.previsao = previsao;
 	}
 	
+	
 	/**
-	 * Mostra o estado de previs�o apostado.
-	 * @return Retorna uma String representando a previs�o feita nessa aposta.
+	 * Exibe a previsao que foi apostada.
+	 * 
+	 * @return retorna uma String com a previsao.
 	 */
 	public String getPrevisao() {
 		return this.previsao;
 	}
 
+	
 	/**
-	 * Mostra o valor que foi apostado.
-	 * @return retorna um inteiro mostrando o valor apostado.
+	 * Exibe a quantia apostada.
+	 * 
+	 * @return Retorna um inteiro com o valor apostado.
 	 */
 	public int getValor() {
 		return this.valor;
@@ -72,9 +79,9 @@ public abstract class Aposta {
 			return false;
 		return true;
 	}
-	
+
 	/**
-	 * Retorna uma String com nome do apostador, o valor apostado e a previs�o apostada.
+	 * Retorna uma String com a representacao textual do Apostador, no formado "apostador - valor - previsao".
 	 */
 	public String toString() {
 		return this.nomeDoApostador + " - R$" + this.valor + " - " + this.previsao;

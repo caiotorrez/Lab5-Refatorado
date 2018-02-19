@@ -22,7 +22,7 @@ public class TesteApostaComum {
 	public void testeApostaValorZero() {
 		try {
 			this.aposta = new ApostaComum("Caio", 0, "VAI ACONTECER");
-			fail("Não pode ser possível.");
+			fail("Nï¿½o pode ser possï¿½vel.");
 		} catch (Exception e) {
 			assertEquals("Erro no cadastro de aposta: Valor nao pode ser menor ou igual a zero", e.getMessage());
 		}
@@ -32,7 +32,7 @@ public class TesteApostaComum {
 	public void testeApostaValorNegativo() {
 		try {
 			this.aposta = new ApostaComum("Caio", -1, "VAI ACONTECER");
-			fail("Não pode ser possível.");
+			fail("Nï¿½o pode ser possï¿½vel.");
 		} catch (Exception e) {
 			assertEquals("Erro no cadastro de aposta: Valor nao pode ser menor ou igual a zero", e.getMessage());
 		}
@@ -41,8 +41,8 @@ public class TesteApostaComum {
 	@Test
 	public void testeApostaPrevisaoInvalido() {
 		try {
-			this.aposta = new ApostaComum("zé", 100, "XXX VAI ACONTECER");
-			fail("Não pode ser possível.");
+			this.aposta = new ApostaComum("zï¿½", 100, "XXX VAI ACONTECER");
+			fail("Nï¿½o pode ser possï¿½vel.");
 		} catch (Exception e) {
 			assertEquals("Erro no cadastro de aposta: Previsao invalida", e.getMessage());
 		}
@@ -51,8 +51,8 @@ public class TesteApostaComum {
 	@Test
 	public void testeApostaPrevisaoEmBranco() {
 		try {
-			this.aposta = new ApostaComum("zé", 100, "  ");
-			fail("Não pode ser possível.");
+			this.aposta = new ApostaComum("zï¿½", 100, "  ");
+			fail("Nï¿½o pode ser possï¿½vel.");
 		} catch (Exception e) {
 			assertEquals("Erro no cadastro de aposta: Previsao nao pode ser vazia ou nula", e.getMessage());
 		}
@@ -61,8 +61,8 @@ public class TesteApostaComum {
 	@Test
 	public void testeApostaPrevisaoNull() {
 		try {
-			this.aposta = new ApostaComum("zé", 100, null);
-			fail("Não pode ser possível.");
+			this.aposta = new ApostaComum("zï¿½", 100, null);
+			fail("Nï¿½o pode ser possï¿½vel.");
 		} catch (Exception e) {
 			assertEquals("Erro no cadastro de aposta: Previsao nao pode ser vazia ou nula", e.getMessage());
 		}
@@ -72,7 +72,7 @@ public class TesteApostaComum {
 	public void testeApostaApostadorEmBranco() {
 		try {
 			this.aposta = new ApostaComum("  ", 100, "VAI ACONTECER");
-			fail("Não pode ser possível.");
+			fail("Nï¿½o pode ser possï¿½vel.");
 		} catch (Exception e) {
 			assertEquals("Erro no cadastro de aposta: Apostador nao pode ser vazio ou nulo", e.getMessage());
 		}
@@ -82,7 +82,7 @@ public class TesteApostaComum {
 	public void testeApostaApostadorNull() {
 		try {
 			this.aposta = new ApostaComum(null, 100, "VAI ACONTECER");
-			fail("Não pode ser possível.");
+			fail("Nï¿½o pode ser possï¿½vel.");
 		} catch (Exception e) {
 			assertEquals("Erro no cadastro de aposta: Apostador nao pode ser vazio ou nulo", e.getMessage());
 		}

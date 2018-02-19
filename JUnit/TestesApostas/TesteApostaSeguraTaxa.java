@@ -22,7 +22,7 @@ public class TesteApostaSeguraTaxa {
 	public void testeApostaSeguraValorZero() {
 		try {
 			this.aposta = new ApostaSegura("Caio", 0, "VAI ACONTECER", 0.10);
-			fail("Não pode ser possível.");
+			fail("Nï¿½o pode ser possï¿½vel.");
 		} catch (Exception e) {
 			assertEquals("Erro no cadastro de aposta assegurada por taxa: Valor nao pode ser menor ou igual a zero", e.getMessage());
 		}
@@ -32,7 +32,7 @@ public class TesteApostaSeguraTaxa {
 	public void testeApostaSeguraValorNegativo() {
 		try {
 			this.aposta = new ApostaSegura("Caio", -1, "VAI ACONTECER", 0.10);
-			fail("Não pode ser possível.");
+			fail("Nï¿½o pode ser possï¿½vel.");
 		} catch (Exception e) {
 			assertEquals("Erro no cadastro de aposta assegurada por taxa: Valor nao pode ser menor ou igual a zero", e.getMessage());
 		}
@@ -42,7 +42,7 @@ public class TesteApostaSeguraTaxa {
 	public void testeApostaSeguraValorPrevisaoInvalida() {
 		try {
 			this.aposta = new ApostaSegura("Caio", 1000, "XXX VAI ACONTECER", 0.10);
-			fail("Não pode ser possível.");
+			fail("Nï¿½o pode ser possï¿½vel.");
 		} catch (Exception e) {
 			assertEquals("Erro no cadastro de aposta assegurada por taxa: Previsao invalida", e.getMessage());
 		}
@@ -52,7 +52,7 @@ public class TesteApostaSeguraTaxa {
 	public void testeApostaSeguraValorPrevisaoEmBranco() {
 		try {
 			this.aposta = new ApostaSegura("Caio", 1000, "  ", 0.10);
-			fail("Não pode ser possível.");
+			fail("Nï¿½o pode ser possï¿½vel.");
 		} catch (Exception e) {
 			assertEquals("Erro no cadastro de aposta assegurada por taxa: Previsao nao pode ser vazia ou nula", e.getMessage());
 		}
@@ -62,7 +62,7 @@ public class TesteApostaSeguraTaxa {
 	public void testeApostaSeguraValorPrevisaoNull() {
 		try {
 			this.aposta = new ApostaSegura("Caio", 1000, null, 0.10);
-			fail("Não pode ser possível.");
+			fail("Nï¿½o pode ser possï¿½vel.");
 		} catch (Exception e) {
 			assertEquals("Erro no cadastro de aposta assegurada por taxa: Previsao nao pode ser vazia ou nula", e.getMessage());
 		}
@@ -72,7 +72,7 @@ public class TesteApostaSeguraTaxa {
 	public void testeApostaSeguraValorApostadorEmBranco() {
 		try {
 			this.aposta = new ApostaSegura(" ", 1000, "VAI ACONTECER", 0.10);
-			fail("Não pode ser possível.");
+			fail("Nï¿½o pode ser possï¿½vel.");
 		} catch (Exception e) {
 			assertEquals("Erro no cadastro de aposta assegurada por taxa: Apostador nao pode ser vazio ou nulo", e.getMessage());
 		}
@@ -82,7 +82,7 @@ public class TesteApostaSeguraTaxa {
 	public void testeApostaSeguraValorApostadorNull() {
 		try {
 			this.aposta = new ApostaSegura(null, 1000, "VAI ACONTECER", 0.10);
-			fail("Não pode ser possível.");
+			fail("Nï¿½o pode ser possï¿½vel.");
 		} catch (Exception e) {
 			assertEquals("Erro no cadastro de aposta assegurada por taxa: Apostador nao pode ser vazio ou nulo", e.getMessage());
 		}

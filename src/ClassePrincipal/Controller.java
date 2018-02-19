@@ -2,6 +2,7 @@ package ClassePrincipal;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.List;
 
 import Cenarios.Cenario;
 import Cenarios.CenarioBonus;
@@ -13,7 +14,7 @@ import easyaccept.EasyAccept;
 
 public class Controller {
 	
-	private ArrayList<Cenario> cenarios;
+	private List<Cenario> cenarios;
 	private int caixa;
 	private double taxa;
 	ValidadorDoController validar;
