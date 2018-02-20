@@ -4,6 +4,7 @@ import Exceptions.CadastroInvalidoException;
 import Exceptions.ConsultaException;
 import Exceptions.ExibicaoException;
 import Exceptions.InicializacaoException;
+import Exceptions.OrdemInvalidaException;
 import Exceptions.PosicaoInvalidaException;
 
 public class ValidadorDoController {
@@ -117,6 +118,26 @@ public class ValidadorDoController {
 	public void checkTotalRateioEstado(String estado) {
 		if (estado.equals("Nao finalizado")) {
 			throw new ConsultaException("do total de rateio do cenario", "Cenario ainda esta aberto");
+		}
+		
+	}
+
+
+	public void checkExibirCenarioOrdenado(int cenario, int size) {
+		if (cenario < 1) {
+			throw new ConsultaException("de cenario ordenado", "Cenario invalido");
+			
+		} else if (cenario > size) {
+			throw new ConsultaException("de cenario ordenado", "Cenario nao cadastrado");
+		}
+	}
+
+	public void checkAlteraOrdem(String ordem) {
+		if (ordem == null || ordem.trim().equals("")) {
+			throw new OrdemInvalidaException("Ordem nao pode ser vazia ou nula");
+		}
+		else if (!ordem.equalsIgnoreCase("cadastro") && !ordem.equalsIgnoreCase("nome") && !ordem.equalsIgnoreCase("apostas")) {
+			throw new OrdemInvalidaException("Ordem invalida");
 		}
 		
 	}

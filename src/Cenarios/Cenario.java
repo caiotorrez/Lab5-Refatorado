@@ -11,6 +11,7 @@ import Apostas.ApostaSegura;
 import Exceptions.CaractersInvalidoException;
 import Seguro.SeguroTaxa;
 import Seguro.SeguroValor;
+import Seguro.TrocaDeSeguros;
 
 /**
  * Clase abstrata que representa um cenario composta por apostas, onde o usuario pode cadastrar apostas comuns e seguras.
@@ -18,7 +19,7 @@ import Seguro.SeguroValor;
  * @author CaioTorrez
  *
  */
-public abstract class Cenario implements Comparable<Cenario> {
+public abstract class Cenario implements Comparable<Cenario>, TrocaDeSeguros {
 
 	private final int ID;
 	private final String DESCRICAO;
@@ -38,7 +39,7 @@ public abstract class Cenario implements Comparable<Cenario> {
 			throw new CaractersInvalidoException("de cenario:", "Descricao nao pode ser vazia");
 		}
 		this.DESCRICAO = descricao;
-		this.ID = id;
+		this.ID = id + 1;
 		this.estado = "Nao finalizado";
 		this.apostasComum = new ArrayList<>();
 		this.apostasSeguras = new HashMap<>();
