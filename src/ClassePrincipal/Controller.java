@@ -18,6 +18,7 @@ public class Controller {
 	private int caixa;
 	private double taxa;
 	ValidadorDoController validar;
+	private String ordem;
 	
 	public void inicializa(int caixa, double taxa) {
 		this.validar = new ValidadorDoController();
@@ -25,6 +26,7 @@ public class Controller {
 		this.validar.validaCaixa(caixa, taxa);
 		this.caixa = caixa;
 		this.taxa = taxa;
+		this.ordem = "cadastro";
 	}
 	
 	public int getCaixa() {
@@ -117,13 +119,28 @@ public class Controller {
 	}
 	
 	public void alterarOrdem(String ordem) {
-		if (ordem.equals("CADASTRO")) {
-			Collections.sort(this.cenarios);
-		} else if (ordem.equals("NOME")) {
-			Collections.sort(this.cenarios, new CenarioComparatorDescricao());
+		if (!ordem.equalsIgnoreCase("cadastro") && !ordem.equalsIgnoreCase("Nome") && !ordem.equalsIgnoreCase("Apostas")) {
 		} else {
+			this.ordem = ordem.toLowerCase();
+		}
+	}
+	
+	public String exibirCenarioOrdenado(int cenario) {
+		if (this.ordem.equals("nome")) {
+			Collections.sort(this.cenarios, new CenarioComparatorDescricao());
+		}
+		else if (this.ordem.equals("apostas")) {
 			Collections.sort(this.cenarios, new CenarioComparatorQtApostas());
 		}
+		else if (this.ordem.equals("cadastro")) {
+			Collections.sort(this.cenarios);
+		}
+		else {
+			throw new NullPointerException();
+		}
+		String saida = this.cenarios.get(cenario - 1).toString();
+		Collections.sort(this.cenarios);
+		return saida;
 	}
 	
 	public static void main(String[] args) {
